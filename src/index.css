@@ -14,31 +14,31 @@
     --popover: 0 0% 100%;
     --popover-foreground: 210 15% 20%;
 
-    --primary: 142 76% 36%;
+    --primary: 210 85% 45%;
     --primary-foreground: 0 0% 98%;
 
-    --secondary: 197 37% 96%;
+    --secondary: 210 15% 96%;
     --secondary-foreground: 210 15% 20%;
 
-    --muted: 197 37% 96%;
+    --muted: 210 15% 96%;
     --muted-foreground: 210 15% 65%;
 
-    --accent: 142 76% 96%;
-    --accent-foreground: 142 76% 36%;
+    --accent: 210 85% 96%;
+    --accent-foreground: 210 85% 45%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 197 37% 90%;
-    --input: 197 37% 90%;
-    --ring: 142 76% 36%;
+    --border: 210 15% 85%;
+    --input: 210 15% 90%;
+    --ring: 210 85% 45%;
 
-    --radius: 0.75rem;
+    --radius: 0.5rem;
 
-    --medical-primary: 142 76% 36%; /* Medical green */
-    --medical-secondary: 197 37% 47%; /* Medical blue */
-    --medical-accent: 142 43% 85%; /* Light medical green */
-    --medical-blue-light: 197 37% 96%;
+    --medical-primary: 210 85% 45%; /* Medical blue */
+    --medical-secondary: 150 60% 40%; /* Medical green */
+    --medical-accent: 210 15% 97%; /* Light gray-blue */
+    --medical-blue-light: 210 85% 96%;
     --medical-gray: 210 15% 97%;
 
     --sidebar-background: 0 0% 98%;
@@ -61,7 +61,7 @@
     --popover: 210 15% 7%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 142 76% 36%;
+    --primary: 210 85% 45%;
     --primary-foreground: 0 0% 98%;
 
     --secondary: 217.2 32.6% 17.5%;
@@ -102,20 +102,20 @@
 
 @layer utilities {
   .medical-gradient {
-    background: linear-gradient(135deg, hsl(var(--medical-primary)) 0%, hsl(var(--medical-secondary)) 100%);
+    background: hsl(var(--medical-primary));
   }
   
   .medical-gradient-soft {
-    background: linear-gradient(135deg, hsl(var(--medical-blue-light)) 0%, hsl(var(--medical-accent)) 100%);
+    background: hsl(var(--medical-accent));
   }
 
   .glass-morphism {
     backdrop-filter: blur(16px) saturate(180%);
-    background-color: rgba(255, 255, 255, 0.75);
+    background-color: rgba(255, 255, 255, 0.95);
     border: 1px solid rgba(209, 213, 219, 0.3);
   }
 
   .medical-card {
-    @apply bg-white/80 backdrop-blur-sm border border-slate-200/50 shadow-lg;
+    @apply bg-white border border-slate-200 shadow-sm;
   }
 }
