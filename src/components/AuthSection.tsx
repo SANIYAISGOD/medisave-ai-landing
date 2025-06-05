@@ -42,13 +42,13 @@ const AuthSection = ({ isAuthenticated, setIsAuthenticated }: AuthSectionProps) 
   if (isAuthenticated) {
     return (
       <div className="flex items-center gap-4">
-        <div className="flex items-center gap-2 text-white">
-          <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
-            <User className="w-4 h-4" />
+        <div className="flex items-center gap-2 text-slate-800">
+          <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
+            <User className="w-4 h-4 text-white" />
           </div>
           <span className="font-medium">Welcome back!</span>
         </div>
-        <Button variant="outline" onClick={handleLogout} className="border-white text-white hover:bg-white hover:text-green-600">
+        <Button variant="outline" onClick={handleLogout} className="border-slate-600 text-slate-800 hover:bg-slate-100">
           <LogOut className="w-4 h-4 mr-2" />
           Logout
         </Button>
@@ -62,13 +62,13 @@ const AuthSection = ({ isAuthenticated, setIsAuthenticated }: AuthSectionProps) 
         <Button 
           variant="outline" 
           onClick={() => setShowAuth(true)}
-          className="border-white text-white hover:bg-white hover:text-green-600"
+          className="border-slate-600 text-slate-800 hover:bg-slate-100"
         >
           Login
         </Button>
         <Button 
           onClick={() => { setIsLogin(false); setShowAuth(true); }}
-          className="bg-green-500 hover:bg-green-600 text-white"
+          className="bg-blue-600 hover:bg-blue-700 text-white"
         >
           Sign Up
         </Button>
@@ -127,7 +127,7 @@ const AuthSection = ({ isAuthenticated, setIsAuthenticated }: AuthSectionProps) 
                 </div>
 
                 <div className="flex gap-3">
-                  <Button type="submit" className="flex-1 bg-green-600 hover:bg-green-700">
+                  <Button type="submit" className="flex-1 bg-blue-600 hover:bg-blue-700">
                     {isLogin ? "Sign In" : "Create Account"}
                   </Button>
                   <Button 
@@ -145,7 +145,7 @@ const AuthSection = ({ isAuthenticated, setIsAuthenticated }: AuthSectionProps) 
                 <button
                   type="button"
                   onClick={() => setIsLogin(!isLogin)}
-                  className="text-green-600 hover:text-green-700 font-medium"
+                  className="text-blue-600 hover:text-blue-700 font-medium"
                 >
                   {isLogin ? "Need an account? Sign up" : "Already have an account? Sign in"}
                 </button>

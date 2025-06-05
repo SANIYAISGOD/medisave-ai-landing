@@ -11,6 +11,19 @@ const Hero = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const { toast } = useToast();
 
+  const handleStartSaving = () => {
+    if (!isAuthenticated) {
+      toast({
+        title: "Sign up required",
+        description: "You need to sign up first to start analyzing your medical bills.",
+        variant: "destructive",
+      });
+      return;
+    }
+    // If authenticated, scroll to upload section or handle accordingly
+    document.querySelector('#upload-section')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <section className="relative overflow-hidden bg-slate-50 min-h-screen">
       {/* Background Pattern */}
@@ -61,7 +74,11 @@ const Hero = () => {
             </div>
             
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white border-0 group text-lg px-8 py-4">
+              <Button 
+                size="lg" 
+                onClick={handleStartSaving}
+                className="bg-blue-600 hover:bg-blue-700 text-white border-0 group text-lg px-8 py-4"
+              >
                 Start Saving Now
                 <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
               </Button>
@@ -88,7 +105,7 @@ const Hero = () => {
           </div>
 
           {/* Right Column - Upload Interface */}
-          <div className="lg:pl-8">
+          <div className="lg:pl-8" id="upload-section">
             <UploadAnalysis isAuthenticated={isAuthenticated} />
           </div>
         </div>
