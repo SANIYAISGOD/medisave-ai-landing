@@ -2,175 +2,96 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Upload, FileText, Sparkles, ArrowRight } from "lucide-react";
+import { Upload, FileText, Sparkles, ArrowRight, Shield, Users, Activity } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import AuthSection from "./AuthSection";
+import UploadAnalysis from "./UploadAnalysis";
 
 const Hero = () => {
-  const [uploadedFile, setUploadedFile] = useState<File | null>(null);
-  const [isAnalyzing, setIsAnalyzing] = useState(false);
-  const [analysisComplete, setAnalysisComplete] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const { toast } = useToast();
 
-  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      setUploadedFile(file);
-      setIsAnalyzing(true);
-      setAnalysisComplete(false);
-      
-      // Simulate AI analysis
-      setTimeout(() => {
-        setIsAnalyzing(false);
-        setAnalysisComplete(true);
-        toast({
-          title: "Analysis Complete!",
-          description: "Your medical bill has been analyzed. Check the breakdown below.",
-        });
-      }, 3000);
-    }
-  };
-
-  const mockAnalysis = {
-    totalBill: "₹12,450",
-    potentialSavings: "₹4,200",
-    genericAlternatives: 3,
-    eligibleSchemes: ["PMJAY", "CGHS"]
-  };
-
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-blue-600 via-blue-700 to-green-600 text-white">
-      <div className="absolute inset-0 bg-black/10"></div>
-      <div className="relative container mx-auto px-4 py-20 lg:py-32">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+    <section className="relative overflow-hidden medical-gradient min-h-screen">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute inset-0" style={{
+          backgroundImage: `radial-gradient(circle at 2px 2px, rgba(255,255,255,0.15) 1px, transparent 0)`,
+          backgroundSize: '20px 20px'
+        }}></div>
+      </div>
+      
+      {/* Navigation */}
+      <nav className="relative z-10 container mx-auto px-4 py-6">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
+              <Activity className="w-6 h-6 text-green-600" />
+            </div>
+            <span className="text-2xl font-bold text-white">MediSaver AI</span>
+          </div>
+          
+          <AuthSection isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
+        </div>
+      </nav>
+
+      <div className="relative container mx-auto px-4 py-16 lg:py-24">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left Column - Content */}
-          <div className="space-y-8">
-            <div className="space-y-4">
-              <div className="inline-flex items-center gap-2 bg-white/20 rounded-full px-4 py-2 text-sm font-medium">
-                <Sparkles className="w-4 h-4" />
-                AI-Powered Healthcare Savings
+          <div className="space-y-8 text-white">
+            <div className="space-y-6">
+              <div className="inline-flex items-center gap-2 bg-white/20 rounded-full px-6 py-3 text-sm font-medium backdrop-blur-sm">
+                <Shield className="w-4 h-4" />
+                Trusted by 50,000+ Patients
               </div>
-              <h1 className="text-4xl lg:text-6xl font-bold leading-tight">
-                Cut Your Medical Bills with{" "}
-                <span className="bg-gradient-to-r from-green-300 to-blue-300 bg-clip-text text-transparent">
-                  AI
+              
+              <h1 className="text-5xl lg:text-7xl font-bold leading-tight">
+                Cut Your{" "}
+                <span className="relative">
+                  <span className="bg-gradient-to-r from-green-300 to-blue-300 bg-clip-text text-transparent">
+                    Medical Bills
+                  </span>
+                  <div className="absolute -bottom-2 left-0 right-0 h-2 bg-green-400/30 rounded-full"></div>
                 </span>
+                {" "}with AI
               </h1>
-              <p className="text-xl text-blue-100 leading-relaxed">
-                Upload a photo of your hospital bill or prescription and get instant AI-powered analysis 
-                with cost breakdowns, generic medicine suggestions, and government scheme recommendations.
+              
+              <p className="text-xl lg:text-2xl text-blue-100 leading-relaxed font-light">
+                Upload your hospital bill or prescription and get instant AI-powered analysis 
+                with cost breakdowns, generic alternatives, and government scheme eligibility.
               </p>
             </div>
             
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button size="lg" className="bg-green-500 hover:bg-green-600 text-white border-0 group">
-                Try It Now
+              <Button size="lg" className="bg-green-500 hover:bg-green-600 text-white border-0 group text-lg px-8 py-4">
+                Start Saving Now
                 <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
               </Button>
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-blue-600">
-                Learn More
+              <Button size="lg" variant="outline" className="border-2 border-white text-white hover:bg-white hover:text-green-600 text-lg px-8 py-4">
+                Watch Demo
               </Button>
             </div>
 
-            <div className="grid grid-cols-3 gap-6 pt-8">
+            {/* Trust Indicators */}
+            <div className="grid grid-cols-3 gap-8 pt-8 border-t border-white/20">
               <div className="text-center">
-                <div className="text-3xl font-bold text-green-300">₹50L+</div>
-                <div className="text-sm text-blue-200">Total Savings</div>
+                <div className="text-3xl lg:text-4xl font-bold text-green-300">₹2.5Cr+</div>
+                <div className="text-sm text-blue-200 font-medium">Total Savings</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-green-300">10K+</div>
-                <div className="text-sm text-blue-200">Bills Analyzed</div>
+                <div className="text-3xl lg:text-4xl font-bold text-green-300">50K+</div>
+                <div className="text-sm text-blue-200 font-medium">Bills Analyzed</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-green-300">95%</div>
-                <div className="text-sm text-blue-200">Accuracy Rate</div>
+                <div className="text-3xl lg:text-4xl font-bold text-green-300">98%</div>
+                <div className="text-sm text-blue-200 font-medium">Accuracy Rate</div>
               </div>
             </div>
           </div>
 
           {/* Right Column - Upload Interface */}
           <div className="lg:pl-8">
-            <Card className="p-8 bg-white/95 backdrop-blur-sm border-0 shadow-2xl">
-              <div className="space-y-6">
-                <div className="text-center">
-                  <h3 className="text-2xl font-semibold text-gray-800 mb-2">
-                    Upload Your Medical Bill
-                  </h3>
-                  <p className="text-gray-600">
-                    Get instant AI analysis and savings recommendations
-                  </p>
-                </div>
-
-                <div className="border-2 border-dashed border-blue-300 rounded-lg p-8 text-center hover:border-blue-500 transition-colors">
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={handleFileUpload}
-                    className="hidden"
-                    id="file-upload"
-                  />
-                  <label htmlFor="file-upload" className="cursor-pointer">
-                    <div className="space-y-4">
-                      {!uploadedFile ? (
-                        <>
-                          <Upload className="w-12 h-12 text-blue-500 mx-auto" />
-                          <div>
-                            <p className="text-lg font-medium text-gray-700">
-                              Click to upload or drag and drop
-                            </p>
-                            <p className="text-sm text-gray-500">
-                              PNG, JPG up to 10MB
-                            </p>
-                          </div>
-                        </>
-                      ) : (
-                        <>
-                          <FileText className="w-12 h-12 text-green-500 mx-auto" />
-                          <div>
-                            <p className="text-lg font-medium text-gray-700">
-                              {uploadedFile.name}
-                            </p>
-                            <p className="text-sm text-gray-500">
-                              File uploaded successfully
-                            </p>
-                          </div>
-                        </>
-                      )}
-                    </div>
-                  </label>
-                </div>
-
-                {isAnalyzing && (
-                  <div className="text-center space-y-4">
-                    <div className="animate-spin w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full mx-auto"></div>
-                    <p className="text-gray-600">Analyzing your medical bill...</p>
-                  </div>
-                )}
-
-                {analysisComplete && (
-                  <div className="space-y-4 p-6 bg-green-50 rounded-lg border border-green-200">
-                    <h4 className="font-semibold text-green-800">Analysis Results:</h4>
-                    <div className="grid grid-cols-2 gap-4 text-sm">
-                      <div>
-                        <span className="text-gray-600">Total Bill:</span>
-                        <span className="font-medium text-gray-800 ml-2">{mockAnalysis.totalBill}</span>
-                      </div>
-                      <div>
-                        <span className="text-gray-600">Potential Savings:</span>
-                        <span className="font-medium text-green-600 ml-2">{mockAnalysis.potentialSavings}</span>
-                      </div>
-                      <div>
-                        <span className="text-gray-600">Generic Options:</span>
-                        <span className="font-medium text-blue-600 ml-2">{mockAnalysis.genericAlternatives}</span>
-                      </div>
-                      <div>
-                        <span className="text-gray-600">Eligible Schemes:</span>
-                        <span className="font-medium text-purple-600 ml-2">{mockAnalysis.eligibleSchemes.join(", ")}</span>
-                      </div>
-                    </div>
-                  </div>
-                )}
-              </div>
-            </Card>
+            <UploadAnalysis isAuthenticated={isAuthenticated} />
           </div>
         </div>
       </div>
